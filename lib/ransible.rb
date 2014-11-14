@@ -1,5 +1,8 @@
 require 'ransible/version'
 
+# The entrypoint to the module
 module Ransible
-  # Your code goes here...
+  def self.module(&block)
+    yield block
+  end
 end
