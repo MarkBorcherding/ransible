@@ -1,26 +1,54 @@
 # Ransible
 
-TODO: Write a gem description
+A Ruby library for _hopefully_ making Ansible modules
 
-## Installation
+## Motivation
 
-Add this line to your application's Gemfile:
+Using Ansible is preferable to using Chef, but not being able to drop down to Ruby to answer some questions is a pain at time.
+
+## Conceptual Usage
+
+It looks like creating Ansible modules are rather easy. Here is a basic example taken from [ansible/ansible-for-rubyists](https://github.com/ansible/ansible-for-rubyists)
 
 ```ruby
-gem 'ransible'
+#!/usr/bin/ruby
+require 'rubygems'
+require 'json'
+File.open(ARGV[0]) do |fh|
+   data = JSON.parse(fh.read())
+   begin
+      a = data['a'].to_i()
+      b = data['b'].to_i()
+   rescue
+      print JSON.dump({
+          'failed' => true,
+          'msg'    => 'failed to parse inputs x or y'
+      })
+      exit(1)
+   end
+   result = {
+      'a'   => a,
+      'b'   => b,
+      'sum' => a + b,
+   }
+   print JSON.dump(result)
+end
 ```
 
-And then execute:
+Looks straight forward enough. When you create Ansible modules in Python, you get a little more help. This project is an exploration in both Ruby modules for Ansibel and extending help to those wanting to create modules in Ruby.
 
-    $ bundle
+Here is a proposed usage.
 
-Or install it yourself as:
+```ruby
+#!/usr/bin/ruby
+require 'ransible'
 
-    $ gem install ransible
+Ransible::Module.new() do |params,result|
+  result.failed! 'Divide by zero!' if b == 0
+  result.changed! 'We did it!',  answer: a/b
+end
+```
 
-## Usage
-
-TODO: Write usage instructions here
 
 ## Contributing
 
