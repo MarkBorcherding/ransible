@@ -43,7 +43,7 @@ Here is a proposed usage.
 #!/usr/bin/ruby
 require 'ransible'
 
-Ransible.module() do |params,result|
+Ransible.module() do |result, params|
   result.failed! 'Divide by zero!' if b == 0
   result.changed! 'We did it!',  answer: a/b
 end
