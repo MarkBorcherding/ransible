@@ -1,3 +1,5 @@
+require 'json'
+
 module Ransible
   # Arguments file parser
   class ArgumentsFile
