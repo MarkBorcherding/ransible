@@ -44,7 +44,7 @@ Here is a proposed usage.
 require 'ransible'
 
 Ransible.module() do |result, params|
-  result.failed! 'Divide by zero!' if b == 0
+  result.fail! 'Divide by zero!' if b == 0
   result.changed! 'We did it!',  answer: a/b
 end
 ```
