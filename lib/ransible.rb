@@ -1,10 +1,11 @@
 require 'ransible/version'
 require_relative 'ransible/arguments_file'
+require_relative 'ransible/result'
 
 # The entrypoint to the module
 module Ransible
   def self.module
-    result = nil
+    result = Result.new
     yield result, arguments
   end
 
