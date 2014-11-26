@@ -1,0 +1,7 @@
+- name: Show how to use a simple Ransible module
+  hosts: localhost
+  gather_facts: False
+  tasks:
+    - name: Do the thing in Ruby
+      local_action:
+        module: ransible_the_thing
