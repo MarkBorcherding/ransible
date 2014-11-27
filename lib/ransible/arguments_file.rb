@@ -10,13 +10,19 @@ module Ransible
     end
 
     def to_hash
-      self.data ||= JSON.parse(body)
+      self.data ||= pairs.inject({}) do |h, kv|
+        h.merge(Hash[*kv.split('=')])
+      end
     end
 
     private
 
     def body
       @body ||= File.read(filename)
+    end
+
+    def pairs
+      @pairs ||= body.split ' '
     end
   end
 end

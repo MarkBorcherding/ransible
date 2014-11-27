@@ -1,3 +1,7 @@
 #!/usr/bin/env ruby
 
-puts "hi"
+require 'ransible'
+
+Ransible.module do |result, params|
+  result.fail! "nope #{params}"
+end
