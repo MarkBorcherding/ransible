@@ -7,7 +7,7 @@ module Ransible
   def self.module
     result = Result.new
     yield result, arguments
-    print JSON.dump(result.changes)
+    print JSON.dump result.changes
   rescue FailError => e
     print JSON.dump failed: true, msg: e.message
   end
