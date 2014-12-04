@@ -37,13 +37,24 @@ end
 
 Looks straight forward enough. When you create Ansible modules in Python, you get a little more help. This project is an exploration in both Ruby modules for Ansibel and extending help to those wanting to create modules in Ruby.
 
-Here is a proposed usage.
+```python
+module = AnsibleModule(
+    argument_spec = dict(...),
+    supports_check_mode=True
+)
+
+if module.check_mode:
+    # Check if any changes would be made by don't actually make those changes
+    module.exit_json(changed=check_if_system_state_would_be_changed())
+```
+
+Here is a proposed usage for something similar in Ruby.
 
 ```ruby
 #!/usr/bin/ruby
 require 'ransible'
 
-Ransible.module() do |result, params|
+Ransible.module do |result, params|
   result.fail! 'Divide by zero!' if b == 0
   result.changed! 'We did it!',  answer: a/b
 end
